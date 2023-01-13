@@ -2,14 +2,14 @@ setup: true
 version: 2.1
 Branches:
   only:
-    - main
+    - master
 orbs:
   node: circleci/node@4.7
   aws-cli: circleci/aws-cli@1.3.1
 jobs:
   build:
     docker:
-      - image: "cimg/base:stable" #build docker image
+      - image: 'cimg/base:stable' #build docker image
     steps:
       - node/install
       - checkout
