@@ -5,7 +5,7 @@
   "engines": {
     "node": "16.18.0"
   },
-  "main": "server.ts",
+  "main": "src/server.ts",
   "scripts": {
     "start": "node ./server.js",
     "tsc": "npx tsc --skipLibCheck",
