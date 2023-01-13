@@ -1,10 +1,10 @@
 version: 2.1
 orbs:
-  # orgs contain basc recipes and reproducible actions (install node, aws, etc.)
+  # orgs contain (nodejs, aws cli, aws-elastic-beanstalk cli)
   node: circleci/node@5.0.2
   eb: circleci/aws-elastic-beanstalk@2.0.1
   aws-cli: circleci/aws-cli@3.1.1
-  # different jobs are calles later in the workflows sections
+  # different jobs are call later in the workflows sections
 jobs:
   build:
     docker:
@@ -15,7 +15,7 @@ jobs:
       - node/install:
           node-version: '14.15'
       - checkout
-      # Use root level package.json to install dependencies in the frontend app
+      # install dependencies in the frontend app
       - run:
           name: Install Front-End Dependencies
           command: |
@@ -39,7 +39,7 @@ jobs:
           name: API Build
           command: |
             npm run api:build
-  # deploy step will run only after manual approval
+  # deploy step will run only after manual approval in the workflow
   deploy:
     docker:
       - image: 'cimg/base:stable'
@@ -54,7 +54,7 @@ jobs:
           name: Deploy App
           #  Install, build, deploy in both apps
           command: |
-            npm run deploy
+            npm run api:deploy && npm run frontend:deploy
 workflows:
   udagram:
     jobs:
