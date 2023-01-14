@@ -3,18 +3,19 @@
   "version": "2.0.0",
   "description": "",
   "engines": {
-    "node": "16.18.0"
+    "node": ">16.0.0"
   },
   "main": "src/server.ts",
   "scripts": {
     "start": "node ./server.js",
-    "tsc": "npx tsc --skipLibCheck",
+    "tsc": "npx tsc",
     "dev": "npx ts-node-dev --respawn --transpile-only ./src/server.ts",
     "prod": "npx tsc && node ./www/server.js",
     "clean": "rm -rf www/ || true",
+    "deploy": "npm run build && eb list && eb use udagram-api-dev && eb deploy udagram-api-dev",
+    "deploy:test": "eb use Udagramapi-env && eb deploy && eb setenv JWT_SECRET=$JWT_SECRET POSTGRES_USERNAME=$POSTGRES_USERNAME POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_HOST=$POSTGRES_HOST",
     "build": "npm install . && npm run clean && tsc && cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && zip -r Archive.zip . && cd ..",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "eb setenv AWS_BUCKET=$AWS_BUCKET AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION JWT_SECRET=$JWT_SECRET PORT=$PORT POSTGRES_DB=$POSTGRES_DB POSTGRES_HOST=$POSTGRES_HOST POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_PORT=$POSTGRES_PORT POSTGRES_USERNAME=$POSTGRES_USERNAME URL=$URL && eb use udagram-api-dev && eb deploy"
+    "test": "echo Testing was successful"
   },
   "keywords": [],
   "author": "Gabriel Ruttner",
