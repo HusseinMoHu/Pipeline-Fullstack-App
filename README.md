@@ -7,7 +7,28 @@
 ## link deployed
 
 [Frontend](http://udacity-frontend.s3-website-us-east-1.amazonaws.com)
-[API](http://udagram-api-dev222222222222222.us-east-1.elasticbeanstalk.com)
+
+[API](http://udagramapi-env.eba-awxtgynp.us-east-1.elasticbeanstalk.com)
+
+[RDS](udacity-database.cy1bmwi9f5di.us-east-1.rds.amazonaws.com)
+
+## Images
+
+App running on AWS
+![Frontend Frontend](./ScreenShots/frontend-live.png)
+
+S3 Bucket
+![S3 S3](./ScreenShots/S3/s3.png)
+
+RDS postgres
+![RDS RDS](./ScreenShots/RDS/rds-details.png)
+
+Elastic Beanstalk
+![Elastic Beanstalk Elastic Beanstalk](./ScreenShots/Elastic%20Beanstalk/eb-env.png)
+![Elastic Beanstalk Elastic Beanstalk](./ScreenShots/Elastic%20Beanstalk/eb-health.png)
+
+
+
 
 In this project you will learn how to take a newly developed Full-Stack application built for a retailer and deploy it to a cloud service provider so that it is available to customers. You will use the aws console to start and configure the services the application needs such as a database to store product information and a web server allowing the site to be discovered by potential customers. You will modify your package.json scripts and replace hard coded secrets with environment variables in your code.
 
