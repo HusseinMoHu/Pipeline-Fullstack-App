@@ -10,7 +10,7 @@ import { V0_FEED_MODELS, V0_USER_MODELS } from "./controllers/v0/model.index";
 
 (async () => {
   dotenv.config();
-  
+
   try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
@@ -25,7 +25,7 @@ import { V0_FEED_MODELS, V0_USER_MODELS } from "./controllers/v0/model.index";
   console.log("Database Connected");
 
   const app = express();
-  const port = 8080;
+  const port = process.env.PORT || 8080;
 
   app.use(bodyParser.json());
 
@@ -53,12 +53,13 @@ import { V0_FEED_MODELS, V0_USER_MODELS } from "./controllers/v0/model.index";
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-      next();
-    });
+    next();
+  });
   app.use("/api/v0/", IndexRouter);
 
   // Root URI call
   app.get("/", async (req, res) => {
+    console.log("Hello From Root URI");
     res.send("/api/v0/");
   });
 
