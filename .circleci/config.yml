@@ -14,60 +14,30 @@ jobs:
       # install node and checkout code
       - node/install:
           node-version: '14.15'
-      - checkout
-      # Use root level package.json to install dependencies in the frontend app
-      - run:
-          name: Install Front-End Dependencies
-          command: |
-            echo "NODE --version" 
-            echo $(node --version)
-            echo "NPM --version" 
-            echo $(npm --version)
-            npm run frontend:install
-      #  Install dependencies in the the backend API
-      - run:
-          name: Install API Dependencies
-          command: |
-            npm run api:install
-
-      #  Build the frontend app
-      - run:
-          name: Front-End Build
-          command: |
-            npm run frontend:build
-      #  Build the backend API
-      - run:
-          name: API Build
-          command: |
-            npm run api:build
-  # deploy step will run only after manual approval
-  deploy:
-    docker:
-      - image: 'cimg/base:stable'
-      # more setup needed for aws, node, elastic beanstalk
-    steps:
-      - node/install:
-          node-version: '14.15'
       - eb/setup
       - aws-cli/setup
       - checkout
       - run:
-          name: Deploy App
-          #  Install, build, deploy in both apps
+          name: Front-End Install #install frontend dependencies
           command: |
-            npm run deploy
-workflows:
-  udagram:
-    jobs:
-      - build
-      - hold:
-          filters:
-            branches:
-              only:
-                - master
-          type: approval
-          requires:
-            - build
-      - deploy:
-          requires:
-            - hold
+            npm run frontend:install
+      - run:
+          name: Back-End Install #install backend dependencies
+          command: |
+            npm run api:install
+      - run:
+          name: Front-End Build #build api to be smaller
+          command: |
+            npm run frontend:build
+      - run:
+          name: Back-End Build #build angular app into wwww folder
+          command: |
+            npm run api:build
+      - run:
+          name: Deploy api # deploy api on eb
+          command: |
+            npm run api:deploy
+      - run:
+          name: Deploy frontend # deploy frontend on s3 bucket
+          command: |
+            npm run frontend:deploy
