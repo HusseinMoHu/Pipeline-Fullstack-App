@@ -6,9 +6,8 @@
 
 ## link deployed
 
-
-http://udagram-api-dev222222222222222.us-east-1.elasticbeanstalk.com
-http://udacity-frontend.s3-website-us-east-1.amazonaws.com
+[Frontend](http://udacity-frontend.s3-website-us-east-1.amazonaws.com)
+[API](http://udagram-api-dev222222222222222.us-east-1.elasticbeanstalk.com)
 
 In this project you will learn how to take a newly developed Full-Stack application built for a retailer and deploy it to a cloud service provider so that it is available to customers. You will use the aws console to start and configure the services the application needs such as a database to store product information and a web server allowing the site to be discovered by potential customers. You will modify your package.json scripts and replace hard coded secrets with environment variables in your code.
 
